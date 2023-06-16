@@ -1,3 +1,4 @@
+import { Pressable } from "react-native";
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image, TextInput, Button } from 'react-native';
 const eventsData = [{
@@ -26,9 +27,9 @@ const EventItem = ({
     <View style={styles.eventInfo}>
       <Text style={styles.eventTitle}>{event.title}</Text>
       <Text style={styles.eventDescription}>{event.description}</Text>
-      <Text style={styles.eventDateTime}>
+      <Pressable><Text style={styles.eventDateTime}>
         {event.date} - {event.time}
-      </Text>
+      </Text></Pressable>
       <Text style={styles.eventPrice}>{event.price}</Text>
     </View>
   </TouchableOpacity>;

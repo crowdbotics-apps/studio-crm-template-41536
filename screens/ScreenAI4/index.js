@@ -10,9 +10,11 @@ const App = () => {
         <Image style={styles.icon} source={{
         uri: 'https://tinyurl.com/42evm3m3'
       }} />
-        <Image style={styles.icon} source={{
-        uri: 'https://tinyurl.com/42evm3m3'
-      }} />
+        <Pressable onPress={() => {
+        navigation.navigate("ScreenAI16");
+      }}><Image style={styles.icon} source={{
+          uri: 'https://tinyurl.com/42evm3m3'
+        }} /></Pressable>
         <Image style={styles.icon} source={{
         uri: 'https://tinyurl.com/42evm3m3'
       }} />
@@ -24,7 +26,9 @@ const App = () => {
         }}><Text style={styles.buttonText}>Kanban</Text></Pressable>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Booking</Text>
+          <Pressable onPress={() => {
+          navigation.navigate("ScreenAI14");
+        }}><Text style={styles.buttonText}>Booking</Text></Pressable>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Calendar</Text>
