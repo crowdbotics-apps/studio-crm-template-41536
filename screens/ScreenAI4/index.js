@@ -31,13 +31,17 @@ const App = () => {
         }}><Text style={styles.buttonText}>Booking</Text></Pressable>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Calendar</Text>
+          <Pressable onPress={() => {
+          navigation.navigate("ScreenAI18");
+        }}><Text style={styles.buttonText}>Calendar</Text></Pressable>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Chat</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Transactions</Text>
+          <Pressable onPress={() => {
+          navigation.navigate("ScreenAI19");
+        }}><Text style={styles.buttonText}>Transactions</Text></Pressable>
         </TouchableOpacity>
       </View>
     </View>;
