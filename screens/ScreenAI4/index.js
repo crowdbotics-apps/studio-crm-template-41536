@@ -38,7 +38,9 @@ const App = () => {
         }}><Text style={styles.buttonText}>Calendar</Text></Pressable>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Chat</Text>
+          <Pressable onPress={() => {
+          navigation.navigate("ScreenAI27");
+        }}><Text style={styles.buttonText}>Chat</Text></Pressable>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <Pressable onPress={() => {
