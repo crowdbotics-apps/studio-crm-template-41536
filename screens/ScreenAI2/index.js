@@ -16,7 +16,9 @@ const SplashScreen = () => {
         <Pressable onPress={() => {
         navigation.navigate("ScreenAI3");
       }}><Text style={styles.title}>Welcome to Our App</Text></Pressable>
-        <Text style={styles.subtitle}>Loading...</Text>
+        <Pressable onPress={() => {
+        navigation.navigate("ScreenAI6");
+      }}><Text style={styles.subtitle}>Loading...</Text></Pressable>
       </View>
     </View>;
 };

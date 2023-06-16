@@ -1,73 +1,110 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, Button, DatePickerAndroid } from 'react-native';
 
-const PrivacyPolicyScreen = () => {
-  const privacyPolicyText = `
-  1. Introduction
-  Welcome to our Privacy Policy. This document explains how we collect, use, and share your personal information when you use our services.
+const UserProfileScreen = () => {
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [bio, setBio] = useState('');
+  const [gender, setGender] = useState('');
+  const [date, setDate] = useState(new Date());
 
-  2. Information We Collect
-  We collect information you provide directly to us, such as your name, email address, and any other information you choose to provide.
+  const openDatePicker = async () => {
+    try {
+      const {
+        action,
+        year,
+        month,
+        day
+      } = await DatePickerAndroid.open({
+        date
+      });
 
-  3. How We Use Your Information
-  We use your information to provide, maintain, and improve our services, communicate with you, and personalize your experience.
+      if (action !== DatePickerAndroid.dismissedAction) {
+        setDate(new Date(year, month, day));
+      }
+    } catch ({
+      code,
+      message
+    }) {
+      console.warn('Cannot open date picker', message);
+    }
+  };
 
-  4. Sharing Your Information
-  We may share your information with third-party service providers, partners, and other users in accordance with our Privacy Policy.
-
-  5. Security
-  We take reasonable measures to protect your personal information from unauthorized access, use, or disclosure.
-
-  6. Your Rights
-  You have the right to access, update, or delete your personal information at any time.
-
-  7. Changes to This Privacy Policy
-  We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.
-
-  8. Contact Us
-  If you have any questions about this Privacy Policy, please contact us at support@example.com.
-  `;
   return <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Image source={{
-        uri: 'https://tinyurl.com/42evm3m3'
-      }} style={styles.logo} />
-        <Text style={styles.title}>Privacy Policy</Text>
+      <Image style={styles.userImage} source={{
+      uri: 'https://tinyurl.com/42evm3m3'
+    }} />
+      <TextInput style={styles.input} value={name} onChangeText={setName} placeholder="Name" />
+      <TextInput style={styles.input} value={address} onChangeText={setAddress} placeholder="Address" />
+      <TextInput style={styles.textArea} value={bio} onChangeText={setBio} placeholder="Bio" multiline />
+      <View style={styles.radioButtons}>
+        <TouchableOpacity style={styles.radioButton} onPress={() => setGender('male')}>
+          <Text style={styles.radioButtonText}>Male</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.radioButton} onPress={() => setGender('female')}>
+          <Text style={styles.radioButtonText}>Female</Text>
+        </TouchableOpacity>
       </View>
-      <Text style={styles.content}>{privacyPolicyText}</Text>
+      <Button title="Select Birthday" onPress={openDatePicker} />
+      <Text style={styles.dateText}>{date.toDateString()}</Text>
+      <TouchableOpacity style={styles.nextButton}>
+        <Text style={styles.nextButtonText}>Next</Text>
+      </TouchableOpacity>
     </ScrollView>;
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5'
+    padding: 20
   },
-  header: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 50,
-    paddingBottom: 30,
-    backgroundColor: '#FFFFFF'
+  userImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    alignSelf: 'center',
+    marginBottom: 20
   },
-  logo: {
-    width: Dimensions.get('window').width * 0.3,
-    height: Dimensions.get('window').width * 0.3,
-    resizeMode: 'contain'
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 20
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333333',
-    marginTop: 10
+  textArea: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 20,
+    minHeight: 100
   },
-  content: {
-    fontSize: 16,
-    lineHeight: 24,
-    color: '#333333',
-    paddingHorizontal: 20,
-    paddingTop: 30,
-    paddingBottom: 50
+  radioButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20
+  },
+  radioButton: {
+    backgroundColor: '#ccc',
+    borderRadius: 5,
+    padding: 10
+  },
+  radioButtonText: {
+    color: '#fff'
+  },
+  dateText: {
+    textAlign: 'center',
+    marginBottom: 20
+  },
+  nextButton: {
+    backgroundColor: '#007AFF',
+    borderRadius: 5,
+    padding: 10,
+    alignItems: 'center'
+  },
+  nextButtonText: {
+    color: '#fff'
   }
 });
-export default PrivacyPolicyScreen;
+export default UserProfileScreen;
