@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, Button, DatePickerAndroid } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView, Button, DatePickerAndroid, Platform, DatePickerIOS } from 'react-native';
 
 const UserProfileScreen = () => {
   const [name, setName] = useState('');
@@ -9,24 +9,26 @@ const UserProfileScreen = () => {
   const [date, setDate] = useState(new Date());
 
   const openDatePicker = async () => {
-    try {
-      const {
-        action,
-        year,
-        month,
-        day
-      } = await DatePickerAndroid.open({
-        date
-      });
+    if (Platform.OS === 'android') {
+      try {
+        const {
+          action,
+          year,
+          month,
+          day
+        } = await DatePickerAndroid.open({
+          date
+        });
 
-      if (action !== DatePickerAndroid.dismissedAction) {
-        setDate(new Date(year, month, day));
+        if (action !== DatePickerAndroid.dismissedAction) {
+          setDate(new Date(year, month, day));
+        }
+      } catch ({
+        code,
+        message
+      }) {
+        console.warn('Cannot open date picker', message);
       }
-    } catch ({
-      code,
-      message
-    }) {
-      console.warn('Cannot open date picker', message);
     }
   };
 
@@ -45,8 +47,7 @@ const UserProfileScreen = () => {
           <Text style={styles.radioButtonText}>Female</Text>
         </TouchableOpacity>
       </View>
-      <Button title="Select Birthday" onPress={openDatePicker} />
-      <Text style={styles.dateText}>{date.toDateString()}</Text>
+      {Platform.OS === 'ios' ? <DatePickerIOS date={date} onDateChange={setDate} /> : <Button title="Select Birthday" onPress={openDatePicker} />}
       <TouchableOpacity style={styles.nextButton}>
         <Text style={styles.nextButtonText}>Next</Text>
       </TouchableOpacity>
@@ -56,7 +57,8 @@ const UserProfileScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20
+    padding: 20,
+    backgroundColor: '#fff'
   },
   userImage: {
     width: 100,
@@ -93,18 +95,16 @@ const styles = StyleSheet.create({
   radioButtonText: {
     color: '#fff'
   },
-  dateText: {
-    textAlign: 'center',
-    marginBottom: 20
-  },
   nextButton: {
     backgroundColor: '#007AFF',
     borderRadius: 5,
     padding: 10,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 20
   },
   nextButtonText: {
-    color: '#fff'
+    color: '#fff',
+    fontWeight: 'bold'
   }
 });
 export default UserProfileScreen;

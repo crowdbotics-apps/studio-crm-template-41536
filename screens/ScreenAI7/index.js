@@ -1,7 +1,10 @@
+import { useNavigation } from "@react-navigation/native";
+import { Pressable } from "react-native";
 import React, { useState } from 'react';
 import { SafeAreaView, StyleSheet, TextInput, View, Text, TouchableOpacity, Image } from 'react-native';
 
 const TwoFactorAuthScreen = () => {
+  const navigation = useNavigation();
   const [token, setToken] = useState('');
 
   const handleSubmit = () => {// Handle token submission
@@ -18,7 +21,9 @@ const TwoFactorAuthScreen = () => {
         <TextInput style={styles.input} onChangeText={setToken} value={token} placeholder="Enter your token" keyboardType="numeric" maxLength={6} />
       </View>
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Submit</Text>
+        <Pressable onPress={() => {
+        navigation.navigate("ScreenAI9");
+      }}><Text style={styles.buttonText}>Submit</Text></Pressable>
       </TouchableOpacity>
     </SafeAreaView>;
 };
