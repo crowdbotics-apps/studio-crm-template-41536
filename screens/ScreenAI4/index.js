@@ -6,7 +6,9 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 const App = () => {
   const navigation = useNavigation();
   return <View style={styles.container}>
-      <View style={styles.header}>
+      <View style={styles.header} onPress={() => {
+      navigation.navigate("ScreenAI29");
+    }}>
         <Image style={styles.icon} source={{
         uri: 'https://tinyurl.com/42evm3m3'
       }} />
