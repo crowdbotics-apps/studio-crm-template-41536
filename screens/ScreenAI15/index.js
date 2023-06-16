@@ -1,7 +1,10 @@
+import { useNavigation } from "@react-navigation/native";
+import { Pressable } from "react-native";
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 const EventDetails = () => {
+  const navigation = useNavigation();
   const event = {
     title: 'Music Concert',
     price: '$50',
@@ -25,7 +28,9 @@ const EventDetails = () => {
           <Text style={styles.buttonText}>Favorite</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.bookButton}>
-          <Text style={styles.buttonText}>Book Event</Text>
+          <Pressable onPress={() => {
+          navigation.navigate("ScreenAI17");
+        }}><Text style={styles.buttonText}>Book Event</Text></Pressable>
         </TouchableOpacity>
       </View>
     </View>;
