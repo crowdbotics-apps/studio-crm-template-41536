@@ -1,7 +1,10 @@
+import { useNavigation } from "@react-navigation/native";
+import { Pressable } from "react-native";
 import React, { useState } from 'react';
 import { Text, Image, TouchableOpacity, StyleSheet, ScrollView, Button, DatePickerIOS } from 'react-native';
 
 const EventDetailsScreen = () => {
+  const navigation = useNavigation();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const event = {
     title: 'Sample Event',
@@ -16,9 +19,11 @@ const EventDetailsScreen = () => {
     }} style={styles.image} />
       <Text style={styles.title}>{event.title}</Text>
       <Text style={styles.place}>{event.place}</Text>
-      <Text style={styles.time}>
+      <Pressable onPress={() => {
+      navigation.navigate("ScreenAI21");
+    }}><Text style={styles.time}>
         {event.startTime} - {event.endTime}
-      </Text>
+      </Text></Pressable>
       <DatePickerIOS date={selectedDate} onDateChange={setSelectedDate} mode="date" style={styles.datePicker} />
       <TouchableOpacity style={styles.button}>
         <Button title="Book Event" onPress={() => {}} color="#ABAB" />
