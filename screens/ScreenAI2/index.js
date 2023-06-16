@@ -1,7 +1,10 @@
+import { useNavigation } from "@react-navigation/native";
+import { Pressable } from "react-native";
 import React from 'react';
 import { View, Text, Image, StyleSheet, StatusBar } from 'react-native';
 
 const SplashScreen = () => {
+  const navigation = useNavigation();
   return <View style={styles.container}>
       <StatusBar backgroundColor="#1f4037" barStyle="light-content" />
       <View style={styles.logoContainer}>
@@ -10,7 +13,9 @@ const SplashScreen = () => {
       }} style={styles.logo} />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.title}>Welcome to Our App</Text>
+        <Pressable onPress={() => {
+        navigation.navigate("ScreenAI3");
+      }}><Text style={styles.title}>Welcome to Our App</Text></Pressable>
         <Text style={styles.subtitle}>Loading...</Text>
       </View>
     </View>;
