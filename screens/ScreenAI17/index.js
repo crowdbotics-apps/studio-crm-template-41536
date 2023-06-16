@@ -21,7 +21,7 @@ const EventDetailsScreen = () => {
       </Text>
       <DatePickerIOS date={selectedDate} onDateChange={setSelectedDate} mode="date" style={styles.datePicker} />
       <TouchableOpacity style={styles.button}>
-        <Button title="Book Event" onPress={() => {}} color="#FFFFFF" />
+        <Button title="Book Event" onPress={() => {}} color="#ABAB" />
       </TouchableOpacity>
     </ScrollView>;
 };

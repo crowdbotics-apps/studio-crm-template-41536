@@ -1,3 +1,4 @@
+import { Pressable } from "react-native";
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList, Image, StyleSheet, Picker } from 'react-native';
 const transactions = [{
@@ -46,9 +47,11 @@ const TransactionScreen = ({
         uri: 'https://tinyurl.com/42evm3m3'
       }} />
             <View style={styles.transactionDetails}>
-              <Text style={styles.transactionText}>
+              <Pressable onPress={() => {
+          navigation.navigate("ScreenAI20");
+        }}><Text style={styles.transactionText}>
                 {item.sender} → {item.receiver}
-              </Text>
+              </Text></Pressable>
               <Text style={styles.transactionText}>Amount: ${item.amount}</Text>
               <Text style={styles.transactionText}>Date: {item.date}</Text>
               <Text style={styles.transactionText}>Type: {item.type}</Text>
