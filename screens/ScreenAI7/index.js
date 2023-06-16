@@ -22,7 +22,7 @@ const TwoFactorAuthScreen = () => {
       </View>
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Pressable onPress={() => {
-        navigation.navigate("ScreenAI9");
+        navigation.navigate("ScreenAI11");
       }}><Text style={styles.buttonText}>Submit</Text></Pressable>
       </TouchableOpacity>
     </SafeAreaView>;
