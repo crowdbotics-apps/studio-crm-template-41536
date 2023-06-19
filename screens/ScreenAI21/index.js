@@ -1,7 +1,10 @@
+import { useNavigation } from "@react-navigation/native";
+import { Pressable } from "react-native";
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native';
 
 const PaymentScreen = () => {
+  const navigation = useNavigation();
   const [selectedCard, setSelectedCard] = useState(null);
   const cards = [{
     id: '1',
@@ -24,16 +27,18 @@ const PaymentScreen = () => {
       <Image source={{
       uri: 'https://tinyurl.com/42evm3m3'
     }} style={styles.cardImage} />
-      <Text style={styles.cardText}>{`${item.brand} **** **** **** ${item.last4}`}</Text>
+      <Pressable><Text style={styles.cardText}>{`${item.brand} **** **** **** ${item.last4}`}</Text></Pressable>
     </TouchableOpacity>;
 
-  return <View style={styles.container}>
+  return <Pressable onPress={() => {
+    navigation.navigate("ScreenAI23");
+  }}><View style={styles.container}>
       <Text style={styles.amountText}>Amount: ${amount.toFixed(2)}</Text>
       <FlatList data={cards} renderItem={renderItem} keyExtractor={item => item.id} extraData={selectedCard} />
       <TouchableOpacity style={styles.payButton} onPress={() => console.log('Payment submitted')} disabled={!selectedCard}>
         <Text style={styles.payButtonText}>Pay</Text>
       </TouchableOpacity>
-    </View>;
+    </View></Pressable>;
 };
 
 const styles = StyleSheet.create({
